@@ -9,17 +9,70 @@ END_VAR
 VAR
 	Inputs : ST_Inputs;
 	Outputs: ST_Outputs;
+	
+	ActuatorConfiguration : ST_ActuatorConfiguration;
+	Status : ST_ActuatorStatus;
+	
+	Timer : TON;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[IF Outputs.Advance AND NOT Status.Advanced THEN 
+	Timer(IN := TRUE,PT := ActuatorConfiguration.AdvanceFeedbackTimeoutError);
+	
+
+
+
+END_IF
+
+
+
+IF ActuatorConfiguration.AdvancedFeedback AND Outputs.Advance THEN 
+	
+
+
+END_IF]]></ST>
     </Implementation>
+    <Folder Name="private" Id="{93cfe97c-3e07-4074-98cf-f866524a706e}" />
+    <Method Name="_M_EvaluateAdvanceOutput" Id="{3e779a6d-f274-4230-87af-6004f3ba5787}" FolderPath="private\">
+      <Declaration><![CDATA[METHOD PRIVATE _M_EvaluateAdvanceOutput : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF Outputs.Advance AND NOT Status.Advanced THEN 
+	Timer(IN := TRUE,PT := ActuatorConfiguration.AdvanceFeedbackTimeoutError);
+	
+
+
+
+END_IF
+
+
+
+IF ActuatorConfiguration.AdvancedFeedback AND Outputs.Advance THEN 
+	
+
+
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="_M_EvaluateRetractOutput" Id="{7ea95da4-4d46-4abe-84eb-87fe2f4779c9}" FolderPath="private\">
+      <Declaration><![CDATA[METHOD PRIVATE _M_EvaluateRetractOutput : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Advance" Id="{ad5584e3-99b6-42fe-b793-a75e466de17e}">
       <Declaration><![CDATA[METHOD M_Advance
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[Outputs.Advance := TRUE;
+Outputs.Retract := FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_CheckFaultCondition" Id="{587453a8-6b9a-41ee-8d68-4bd9b1e1c12d}">
@@ -52,7 +105,8 @@ END_VAR
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[Outputs.Retract := TRUE;
+Outputs.Advance := FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_SetBranchConfig" Id="{b0905630-03c1-43f5-bf32-1db5d9f9d166}">
@@ -123,10 +177,30 @@ END_VAR
       </Get>
     </Property>
     <LineIds Name="FB_Actuator">
+      <LineId Id="29" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="24" Count="0" />
       <LineId Id="9" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="26" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Actuator._M_EvaluateAdvanceOutput">
+      <LineId Id="6" Count="13" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Actuator._M_EvaluateRetractOutput">
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator.M_Advance">
       <LineId Id="4" Count="0" />
+      <LineId Id="7" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator.M_CheckFaultCondition">
       <LineId Id="7" Count="0" />
@@ -135,6 +209,7 @@ END_VAR
       <LineId Id="10" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator.M_Retract">
+      <LineId Id="7" Count="0" />
       <LineId Id="4" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator.M_SetBranchConfig">

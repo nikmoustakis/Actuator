@@ -9,6 +9,9 @@ STRUCT
 	CurrentStep : UDINT;
 	NextStep : UDINT;
 	ElapsedTime : TIME;
+	Advanced : BOOL;
+	Retracted : BOOL;
+	Unknown : BOOL;
 
 END_STRUCT
 END_TYPE
