@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="ITF_Actuator" Id="{9f4cb64f-ee48-4fe2-8df5-60370a9d528f}">
+    <Declaration><![CDATA[INTERFACE ITF_Actuator
+]]></Declaration>
+    <Method Name="M_Advance" Id="{429c784e-f457-4506-9234-4079523c7ee5}">
+      <Declaration><![CDATA[METHOD M_Advance
+
+]]></Declaration>
+    </Method>
+    <Method Name="M_CheckFaultCondition" Id="{16381640-567f-421d-b87a-cc6774fc50fa}">
+      <Declaration><![CDATA[METHOD M_CheckFaultCondition 
+VAR_INPUT
+	Error : REFERENCE TO ST_Error;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_CheckFaultConditionCustom" Id="{028803e1-67ae-4efe-80e5-c5de16c119da}">
+      <Declaration><![CDATA[METHOD M_CheckFaultConditionCustom 
+VAR_INPUT
+	Active : BOOL;
+	Label : STRING(Param_Error.LABEL_LEN);
+	Message : STRING(Param_Error.MESSAGE_LEN);
+	Priority : E_ErrorPriority;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Retract" Id="{a40c83ca-f09c-4283-97a3-42e602271c37}">
+      <Declaration><![CDATA[METHOD M_Retract
+
+]]></Declaration>
+    </Method>
+    <Property Name="P_ActuatorConfiguration" Id="{c9b4820d-12d6-4620-8f9f-a8fdff887ca3}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+{attribute 'suppress_wrn_C0410'}
+PROPERTY P_ActuatorConfiguration : REFERENCE TO ST_ActuatorConfiguration]]></Declaration>
+      <Get Name="Get" Id="{75fd9b35-bc46-4fe7-a4bd-6325babebd0c}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="P_Status" Id="{1273a58f-2dc7-49b5-9bc7-d2673b6ff7e9}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+{attribute 'suppress_wrn_C0410'}
+PROPERTY P_Status : REFERENCE TO ST_ActuatorStatus]]></Declaration>
+      <Get Name="Get" Id="{e7be9fd5-9f06-4e41-b17d-6b1d35c70798}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

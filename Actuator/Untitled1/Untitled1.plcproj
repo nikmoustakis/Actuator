@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <FileVersion>1.0.0.0</FileVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{653320db-89dc-49df-9a62-576dfcc29dd8}</ProjectGuid>
+    <SubObjectsSortedByName>True</SubObjectsSortedByName>
+    <DownloadApplicationInfo>true</DownloadApplicationInfo>
+    <WriteProductVersion>true</WriteProductVersion>
+    <GenerateTpy>false</GenerateTpy>
+    <Name>Untitled1</Name>
+    <ProgramVersion>3.1.4024.0</ProgramVersion>
+    <Application>{73229a29-fc75-40dc-a617-012b6b0aab5f}</Application>
+    <TypeSystem>{a3cfed19-eaf2-4838-8c53-cd92b98bd162}</TypeSystem>
+    <Implicit_Task_Info>{70eaad47-e959-410d-8347-ed21ae3cc197}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{bb35d2f4-7763-4055-a00c-40e037af8cb2}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{c694acf9-5426-4b3f-b5f2-db22be64f27d}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{492d1d40-888a-460b-9dee-4b912de329e4}</LibraryReferences>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Actuator\Actuator\FB_Actuator.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Actuator\DUTs\ST_Inputs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Actuator\DUTs\ST_Outputs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Actuator\DUTs\ST_ActuatorStatus.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Actuator\DUTs\ST_ActuatorConfiguration.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Actuator\GVLs\Param_Actuator.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="Actuator\ITF_Actuator.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Error\DUTs\E_ErrorPriority.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Error\DUTs\ST_Error.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Error\GVLs\Param_Error.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="Error\POUs\F_ClearError.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Error\POUs\F_ResetErrorList.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PlcTask.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Actuator\Actuator" />
+    <Folder Include="Actuator\DUTs" />
+    <Folder Include="Actuator\GVLs" />
+    <Folder Include="DUTs" />
+    <Folder Include="Error" />
+    <Folder Include="Error\DUTs" />
+    <Folder Include="Error\GVLs" />
+    <Folder Include="Error\POUs" />
+    <Folder Include="GVLs" />
+    <Folder Include="Actuator" />
+    <Folder Include="VISUs" />
+    <Folder Include="POUs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderReference Include="Tc2_Standard">
+      <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Standard</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_System">
+      <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc3_Module">
+      <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc3_Module</Namespace>
+    </PlaceholderReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Untitled1.tmc">
+      <SubType>Content</SubType>
+    </None>
+  </ItemGroup>
+  <ProjectExtensions>
+    <PlcProjectOptions>
+      <XmlArchive>
+  <Data>
+    <o xml:space="preserve" t="OptionKey">
+      <v n="Name">"&lt;ProjectRoot&gt;"</v>
+      <d n="SubKeys" t="Hashtable" />
+      <d n="Values" t="Hashtable" />
+    </o>
+  </Data>
+  <TypeList>
+    <Type n="Hashtable">System.Collections.Hashtable</Type>
+    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+    <Type n="String">System.String</Type>
+  </TypeList>
+</XmlArchive>
+    </PlcProjectOptions>
+  </ProjectExtensions>
+</Project>

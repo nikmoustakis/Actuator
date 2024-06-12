@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="ST_ActuatorConfiguration" Id="{86d51f47-bdaf-491d-9d49-b6e86eb9be0b}">
+    <Declaration><![CDATA[TYPE ST_ActuatorConfiguration :
+STRUCT
+	Name : STRING(Param_Actuator.DESCRIPTION_LEN) := 'StepName';
+	AdvancedFeedback : BOOL;
+	RetractFeedback  : BOOL;
+	AdvanceFeedbackTimeout : TIME;
+	RetractFeedbackTimeout : TIME;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

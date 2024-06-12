@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="ST_Inputs" Id="{a8d8dd16-b59b-467e-8b3d-d6bc677ec109}">
+    <Declaration><![CDATA[TYPE ST_Inputs :
+STRUCT
+	Advanced   AT %I*: BOOL; //Hardware Feedback for Output Advance
+	Retracted  AT %I*: BOOL; //Hardware Feedback for Input Retract
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

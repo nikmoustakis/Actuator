@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_Actuator" Id="{832c9e0d-7174-4861-904a-a589655cca30}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Actuator IMPLEMENTS ITF_Actuator
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	Inputs : ST_Inputs;
+	Outputs: ST_Outputs;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="M_Advance" Id="{ad5584e3-99b6-42fe-b793-a75e466de17e}">
+      <Declaration><![CDATA[METHOD M_Advance
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Advance_1" Id="{64eba757-ab7f-4d25-85bf-782f55cea0c9}">
+      <Declaration><![CDATA[METHOD M_Retract
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_CheckFaultCondition" Id="{587453a8-6b9a-41ee-8d68-4bd9b1e1c12d}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD M_CheckFaultCondition
+VAR_INPUT
+	Error	: REFERENCE TO ST_Error;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_CheckFaultConditionCustom" Id="{d44eca9f-a4a7-4a2c-90cd-f6b20332a910}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD M_CheckFaultConditionCustom
+VAR_INPUT
+	Active	: BOOL;
+	Label	: STRING(Param_Error.LABEL_LEN);
+	Message	: STRING(Param_Error.MESSAGE_LEN);
+	Priority	: E_ErrorPriority;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_SetBranchConfig" Id="{b0905630-03c1-43f5-bf32-1db5d9f9d166}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD M_SetBranchConfig
+VAR_INPUT
+	BranchIndex	: USINT;
+	Description	: STRING(Param_Actuator.DESCRIPTION_LEN);
+	NextStep	: UDINT;
+	CheckWhileFaulted	: BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_SetBranchPermissive" Id="{07d1d8b6-29fd-47d9-b0f6-a1cd7848d245}">
+      <Declaration><![CDATA[{warning 'add method implementation '}
+METHOD M_SetBranchPermissive : BOOL
+VAR_INPUT
+	BranchIndex	: DINT;
+	PermissiveIndex	: USINT;
+	Description	: STRING(Param_Actuator.DESCRIPTION_LEN);
+	Condition	: BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="P_Status" Id="{24f6d3f2-d1d4-45c8-95d4-2ca1c47f0919}">
+      <Declaration><![CDATA[{warning 'add property implementation'}
+PROPERTY P_Status : REFERENCE TO ST_ActuatorStatus
+]]></Declaration>
+      <Get Name="Get" Id="{c600f93d-fb20-4117-a317-dd5c20a90da0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="P_StepConfig" Id="{d982b9bc-be38-446d-b1f9-3d9d1aa27058}">
+      <Declaration><![CDATA[{warning 'add property implementation'}
+PROPERTY P_StepConfig : REFERENCE TO ST_ActuatorConfiguration
+]]></Declaration>
+      <Get Name="Get" Id="{fe3ba880-ca99-4fa2-9c56-266a541a4801}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="P_StepStatus" Id="{61f7f2c2-f3d8-4ebd-9165-953f7c4a2e4e}">
+      <Declaration><![CDATA[{warning 'add property implementation'}
+PROPERTY P_StepStatus : REFERENCE TO ST_StepStatus
+]]></Declaration>
+      <Get Name="Get" Id="{5b1eebe6-a1de-4d0a-a7fb-eca577e2dc4a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="FB_Actuator">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Actuator.M_Advance">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Actuator.M_Advance_1">
+      <LineId Id="4" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Actuator.M_CheckFaultCondition">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Actuator.M_CheckFaultConditionCustom">
+      <LineId Id="10" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Actuator.M_SetBranchConfig">
+      <LineId Id="10" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Actuator.M_SetBranchPermissive">
+      <LineId Id="10" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Actuator.P_Status.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Actuator.P_StepConfig.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Actuator.P_StepStatus.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
