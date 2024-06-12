@@ -25,6 +25,11 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Method Name="M_Reset" Id="{caf815d4-5543-4773-bd0f-b83b9282d109}">
+      <Declaration><![CDATA[METHOD M_Reset : BOOL
+
+]]></Declaration>
+    </Method>
     <Method Name="M_Retract" Id="{a40c83ca-f09c-4283-97a3-42e602271c37}">
       <Declaration><![CDATA[METHOD M_Retract
 

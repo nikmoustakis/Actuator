@@ -22,14 +22,6 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Advance_1" Id="{64eba757-ab7f-4d25-85bf-782f55cea0c9}">
-      <Declaration><![CDATA[METHOD M_Retract
-
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="M_CheckFaultCondition" Id="{587453a8-6b9a-41ee-8d68-4bd9b1e1c12d}">
       <Declaration><![CDATA[{warning 'add method implementation '}
 METHOD M_CheckFaultCondition
@@ -50,6 +42,14 @@ VAR_INPUT
 	Message	: STRING(Param_Error.MESSAGE_LEN);
 	Priority	: E_ErrorPriority;
 END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Retract" Id="{64eba757-ab7f-4d25-85bf-782f55cea0c9}">
+      <Declaration><![CDATA[METHOD M_Retract
+
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -128,14 +128,14 @@ END_VAR
     <LineIds Name="FB_Actuator.M_Advance">
       <LineId Id="4" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Actuator.M_Advance_1">
-      <LineId Id="4" Count="0" />
-    </LineIds>
     <LineIds Name="FB_Actuator.M_CheckFaultCondition">
       <LineId Id="7" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator.M_CheckFaultConditionCustom">
       <LineId Id="10" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Actuator.M_Retract">
+      <LineId Id="4" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator.M_SetBranchConfig">
       <LineId Id="10" Count="0" />

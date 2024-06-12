@@ -3,11 +3,13 @@
   <DUT Name="ST_ActuatorConfiguration" Id="{86d51f47-bdaf-491d-9d49-b6e86eb9be0b}">
     <Declaration><![CDATA[TYPE ST_ActuatorConfiguration :
 STRUCT
-	Name : STRING(Param_Actuator.DESCRIPTION_LEN) := 'StepName';
-	AdvancedFeedback : BOOL;
-	RetractFeedback  : BOOL;
-	AdvanceFeedbackTimeout : TIME;
-	RetractFeedbackTimeout : TIME;
+	Name : STRING(Param_Actuator.DESCRIPTION_LEN) := 'Actuator'; //Name visualized on UI
+	AdvancedFeedback : BOOL;      //TRUE if advanced state feedback is used  
+	RetractFeedback  : BOOL;      //TRUE if retracted state feedback is used  
+	AdvanceFeedbackTimeoutError : TIME; // How long we wait to see advanced feedback before we raise timeout error; 0 if not used
+	RetractFeedbackTimeoutError : TIME; // How long we wait to see retracted feedback before we raise timeout error; 0 if not used
+	NoAdvancedFeedbackDelay : TIME; //If we do not use Advanced Feedback, serves as simulation delay after Advance Output is Set
+	NoRetractedFeedbacDelay : TIME; //If we do not use Retracted Feedback, serves as simulation delay after Advance Output is Set
 END_STRUCT
 END_TYPE
 ]]></Declaration>
