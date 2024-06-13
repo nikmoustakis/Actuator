@@ -80,7 +80,7 @@ ELSIF NOT ActuatorConfiguration.AdvancedFeedback AND Outputs.Advance AND Timer_S
 	Status.Advanced := TRUE;
 
 //
-ELSIF  ActuatorConfiguration.AdvancedFeedback AND NOT Inputs.Advanced THEN 
+ELSIF  ActuatorConfiguration.AdvancedFeedback AND Outputs.Advance AND NOT Inputs.Advanced THEN 
 	
 	Timer_RaiseError_Advance(IN := TRUE,PT := ActuatorConfiguration.AdvanceFeedbackTimeoutError);
 
@@ -158,7 +158,7 @@ ELSIF NOT ActuatorConfiguration.RetractFeedback AND Outputs.Retract AND Timer_Si
 	Status.Retracted := TRUE;
 
 //
-ELSIF  ActuatorConfiguration.RetractFeedback AND NOT Inputs.Retracted THEN 
+ELSIF  ActuatorConfiguration.RetractFeedback AND Outputs.Retract AND NOT Inputs.Retracted THEN 
 	
 	Timer_RaiseError_Retract(IN := TRUE,PT := ActuatorConfiguration.RetractFeedbackTimeoutError);
 
@@ -256,6 +256,9 @@ IF (Status.LastCommand = E_ActuatorCommand.Advance) AND Status.Faulted THEN
 ELSIF (Status.LastCommand = E_ActuatorCommand.Retract) AND Status.Faulted THEN 
 	Status.ET_Status_Retracted := T#0S;
 END_IF
+
+Outputs.Advance := FALSE;
+Outputs.Retract := FALSE;
 ]]></ST>
       </Implementation>
     </Method>
@@ -413,6 +416,9 @@ END_VAR
       <LineId Id="9" Count="0" />
       <LineId Id="8" Count="0" />
       <LineId Id="10" Count="3" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="16" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator.M_Retract">
