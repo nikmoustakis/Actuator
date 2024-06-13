@@ -10,9 +10,35 @@
 		</System>
 		<Plc>
 			<Project GUID="{653320DB-89DC-49DF-9A62-576DFCC29DD8}" Name="Untitled1" PrjFilePath="Untitled1\Untitled1.plcproj" TmcFilePath="Untitled1\Untitled1.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Untitled1\Untitled1.tmc" TmcHash="{8FB165A0-E0B7-27AC-F714-963EF2B4EB66}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Untitled1\Untitled1.tmc" TmcHash="{A448C20B-AD8A-1A98-2FEA-C0D4A5FC80A4}">
 					<Name>Untitled1 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="1">
+						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>MAIN.Actuator.Inputs.Advanced</Name>
+							<Comment><![CDATA[Hardware Feedback for Output Advance]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Actuator.Inputs.Retracted</Name>
+							<Comment><![CDATA[Hardware Feedback for Input Retract]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>MAIN.Actuator.Outputs.Advance</Name>
+							<Comment><![CDATA[Hardware Output Advance Signal]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.Actuator.Outputs.Retract</Name>
+							<Comment><![CDATA[Hardware Output Retract Signal]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
 					<Contexts>
 						<Context>
 							<Id>0</Id>

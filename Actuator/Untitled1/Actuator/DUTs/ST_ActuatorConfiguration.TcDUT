@@ -8,8 +8,8 @@ STRUCT
 	RetractFeedback  : BOOL;      //TRUE if retracted state feedback is used  
 	AdvanceFeedbackTimeoutError : TIME; // How long we wait to see advanced feedback before we raise timeout error; 0 if not used
 	RetractFeedbackTimeoutError : TIME; // How long we wait to see retracted feedback before we raise timeout error; 0 if not used
-	SimFeedback_Advance : TIME; //If we do not use Advanced Feedback, serves as simulation delay after Advance Output is Set
-	SimFeedback_Retract : TIME; //If we do not use Retracted Feedback, serves as simulation delay after Advance Output is Set
+	SimFeedback_Advance_TimeElapsed : TIME; //If we do not use Advanced Feedback, serves as simulation delay after Advance Output is Set
+	SimFeedback_Retract_TimeElapsed : TIME; //If we do not use Retracted Feedback, serves as simulation delay after Advance Output is Set
 END_STRUCT
 END_TYPE
 ]]></Declaration>

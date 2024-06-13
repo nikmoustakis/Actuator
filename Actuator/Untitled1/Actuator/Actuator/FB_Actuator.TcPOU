@@ -22,17 +22,22 @@ VAR
 	Timer_SimFeedback_Advance        : TON;   //If
 	
 	R_TRIG_Status_Advanced           : R_TRIG;
+	R_TRIG_Advance_Cmd               : R_TRIG;
 	
 //Timers used for Retract Output/State
 	Timer_RaiseError_Retract         : TON;   //If feedback is used and has not been TRUE after elapsed Timer raise error
 	Timer_Feedback_Retract           : TON;
 	Timer_SimFeedback_Retract        : TON;   //If
 	
-	R_TRIG_Status_Retracted          : R_TRIG;;
+	R_TRIG_Status_Retracted          : R_TRIG;
+	R_TRIG_Retract_Cmd               : R_TRIG;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[_M_EvaluateAdvanceOutput();
+_M_EvaluateRetractOutput();
+
+Status.Faulted := Fault.Active;
 
 ]]></ST>
     </Implementation>
@@ -48,25 +53,24 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[R_TRIG_Status_Advanced(CLK := Status.Advanced);
+R_TRIG_Advance_Cmd(CLK := Outputs.Advance);
 
-IF Outputs.Advance AND NOT Status.Advanced THEN 
-	Timer_Feedback_Advance(IN:= TRUE, PT := T#24H);
-ELSIF Outputs.Advance AND R_TRIG_Status_Advanced.Q THEN 
-	Status.Elapsed_Time_Advance :=  Timer_Feedback_Advance.ET;
-	Timer_Feedback_Advance(IN:= FALSE, PT := T#24H);
-	Timer_SimFeedback_Advance(IN:= FALSE,PT := ActuatorConfiguration.SimFeedback_Advance);
-END_IF
+//IF Outputs.Advance AND NOT Status.Advanced THEN 
+//	Timer_Feedback_Advance(IN:= TRUE, PT := T#24H);
+//	Status.ET_Status_Advanced :=  Timer_Feedback_Advance.ET;
+//ELSIF Outputs.Advance AND R_TRIG_Status_Advanced.Q THEN 
+//	//Status.ET_Status_Advanced :=  Timer_Feedback_Advance.ET;
+	
+//END_IF
 
 
 
-IF NOT ActuatorConfiguration.AdvancedFeedback AND Outputs.Advance 
-		AND (ActuatorConfiguration.AdvanceFeedbackTimeoutError > T#0S) AND NOT Timer_SimFeedback_Advance.Q THEN 
+IF NOT ActuatorConfiguration.AdvancedFeedback AND Outputs.Advance AND NOT Timer_SimFeedback_Advance.Q THEN 
 		
-	Timer_SimFeedback_Advance(IN:=TRUE,PT := ActuatorConfiguration.SimFeedback_Advance);
+	Timer_SimFeedback_Advance(IN:=TRUE,PT := ActuatorConfiguration.SimFeedback_Advance_TimeElapsed);
 				
 //
-ELSIF NOT ActuatorConfiguration.AdvancedFeedback AND Outputs.Advance 
-		AND (ActuatorConfiguration.AdvanceFeedbackTimeoutError > T#0S) AND Timer_SimFeedback_Advance.Q	THEN 
+ELSIF NOT ActuatorConfiguration.AdvancedFeedback AND Outputs.Advance AND Timer_SimFeedback_Advance.Q	THEN 
 
 					
 	Status.Advanced := TRUE;
@@ -83,17 +87,34 @@ ELSIF  ActuatorConfiguration.AdvancedFeedback AND inputs.Advanced THEN
 		
 ELSIF Outputs.Retract AND Inputs.Advanced THEN 
 	
-	Timer_SimFeedback_Advance(IN:= FALSE,PT := ActuatorConfiguration.SimFeedback_Advance);
+	Timer_SimFeedback_Advance(IN:= FALSE,PT := ActuatorConfiguration.SimFeedback_Advance_TimeElapsed);
 	Status.Advanced := FALSE;
 END_IF
 
-
-
+IF R_TRIG_Advance_Cmd.Q THEN 
+	Status.Advanced := FALSE;
+	Status.Retracted := FALSE;
+END_IF
 
 IF Timer_RaiseError_Advance.Q THEN 
 	Fault.Active := TRUE;
 	Fault.Message := CONCAT(('Advanced Input '),Param_Actuator.TIMEOUT_LABEL);
 END_IF
+
+IF Status.Advanced THEN 
+	Timer_Feedback_Advance(IN:= FALSE, PT := T#24H);
+	Timer_SimFeedback_Advance(IN:= FALSE,PT := ActuatorConfiguration.SimFeedback_Advance_TimeElapsed);
+END_IF
+
+IF Outputs.Advance AND NOT Status.Advanced THEN 
+	Timer_Feedback_Advance(IN:= TRUE, PT := T#24H);
+	Status.ET_Status_Advanced :=  Timer_Feedback_Advance.ET;
+ELSIF Outputs.Advance AND R_TRIG_Status_Advanced.Q THEN 
+	//Status.ET_Status_Advanced :=  Timer_Feedback_Advance.ET;
+	
+END_IF
+
+
 ]]></ST>
       </Implementation>
     </Method>
@@ -103,7 +124,72 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[R_TRIG_Status_Retracted(CLK := Status.Retracted);
+R_TRIG_Retract_Cmd(CLK := Outputs.Retract);
+
+//IF Outputs.Retract AND NOT Status.Retracted THEN 
+//	Timer_Feedback_Retract(IN:= TRUE, PT := T#24H);
+//	Status.ET_Status_Retracted :=  Timer_Feedback_Retract.ET;
+	
+//ELSIF Outputs.Retract AND R_TRIG_Status_Retracted.Q THEN 
+//	//Status.ET_Status_Retracted :=  Timer_Feedback_Retract.ET;
+	
+//END_IF
+
+
+
+IF NOT ActuatorConfiguration.RetractFeedback AND Outputs.Retract AND NOT Timer_SimFeedback_Retract.Q THEN 
+		
+	Timer_SimFeedback_Retract(IN:=TRUE,PT := ActuatorConfiguration.SimFeedback_Retract_TimeElapsed);
+				
+//
+ELSIF NOT ActuatorConfiguration.RetractFeedback AND Outputs.Retract AND Timer_SimFeedback_Retract.Q	THEN 
+
+					
+	Status.Retracted := TRUE;
+
+//
+ELSIF  ActuatorConfiguration.RetractFeedback AND NOT Inputs.Retracted THEN 
+	
+	Timer_RaiseError_Retract(IN := TRUE,PT := ActuatorConfiguration.RetractFeedbackTimeoutError);
+
+//	
+ELSIF  ActuatorConfiguration.RetractFeedback AND inputs.Retracted THEN 
+	
+	Status.Retracted := TRUE;
+		
+ELSIF Outputs.Advance AND Inputs.Retracted THEN 
+	
+	Timer_SimFeedback_Retract(IN:= FALSE,PT := ActuatorConfiguration.SimFeedback_Retract_TimeElapsed);
+	Status.Retracted := FALSE;
+END_IF
+
+
+IF R_TRIG_Retract_Cmd.Q THEN 
+	Status.Advanced := FALSE;
+	Status.Retracted := FALSE;
+END_IF
+
+
+IF Timer_RaiseError_Retract.Q THEN 
+	Fault.Active := TRUE;
+	Fault.Message := CONCAT(('Retracted Input '),Param_Actuator.TIMEOUT_LABEL);
+END_IF
+
+IF Status.Retracted THEN 
+	Timer_Feedback_Retract(IN:= FALSE, PT := T#24H);
+	Timer_SimFeedback_Retract(IN:= FALSE,PT := ActuatorConfiguration.SimFeedback_Retract_TimeElapsed);
+END_IF
+
+IF Outputs.Retract AND NOT Status.Retracted THEN 
+	Timer_Feedback_Retract(IN:= TRUE, PT := T#24H);
+	Status.ET_Status_Retracted :=  Timer_Feedback_Retract.ET;
+	
+ELSIF Outputs.Retract AND R_TRIG_Status_Retracted.Q THEN 
+	//Status.ET_Status_Retracted :=  Timer_Feedback_Retract.ET;
+	
+END_IF
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Advance" Id="{ad5584e3-99b6-42fe-b793-a75e466de17e}">
@@ -188,16 +274,16 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="P_ActuatorConfig" Id="{d982b9bc-be38-446d-b1f9-3d9d1aa27058}">
+    <Property Name="P_ActuatorConfiguration" Id="{d982b9bc-be38-446d-b1f9-3d9d1aa27058}">
       <Declaration><![CDATA[{warning 'add property implementation'}
-PROPERTY P_ActuatorConfig : REFERENCE TO ST_ActuatorConfiguration
+PROPERTY P_ActuatorConfiguration : REFERENCE TO ST_ActuatorConfiguration
 ]]></Declaration>
       <Get Name="Get" Id="{fe3ba880-ca99-4fa2-9c56-266a541a4801}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[]]></ST>
+          <ST><![CDATA[P_ActuatorConfiguration REF= ActuatorConfiguration;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -210,31 +296,35 @@ PROPERTY P_Status : REFERENCE TO ST_ActuatorStatus
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[]]></ST>
+          <ST><![CDATA[P_Status REF= Status;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <LineIds Name="FB_Actuator">
       <LineId Id="26" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="65" Count="0" />
       <LineId Id="61" Count="0" />
       <LineId Id="60" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator._M_EvaluateAdvanceOutput">
       <LineId Id="25" Count="0" />
+      <LineId Id="81" Count="0" />
       <LineId Id="78" Count="0" />
       <LineId Id="26" Count="0" />
       <LineId Id="70" Count="0" />
+      <LineId Id="119" Count="0" />
       <LineId Id="72" Count="1" />
-      <LineId Id="79" Count="1" />
+      <LineId Id="79" Count="0" />
       <LineId Id="71" Count="0" />
       <LineId Id="77" Count="0" />
       <LineId Id="76" Count="0" />
-      <LineId Id="27" Count="2" />
+      <LineId Id="27" Count="1" />
       <LineId Id="39" Count="0" />
       <LineId Id="30" Count="1" />
       <LineId Id="43" Count="0" />
       <LineId Id="32" Count="0" />
-      <LineId Id="36" Count="0" />
       <LineId Id="38" Count="0" />
       <LineId Id="37" Count="0" />
       <LineId Id="33" Count="0" />
@@ -249,16 +339,26 @@ END_VAR
       <LineId Id="41" Count="1" />
       <LineId Id="34" Count="1" />
       <LineId Id="5" Count="0" />
-      <LineId Id="56" Count="2" />
-      <LineId Id="52" Count="0" />
-      <LineId Id="51" Count="0" />
-      <LineId Id="53" Count="0" />
-      <LineId Id="55" Count="0" />
-      <LineId Id="50" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="105" Count="13" />
+      <LineId Id="121" Count="6" />
+      <LineId Id="120" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="88" Count="0" />
       <LineId Id="49" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator._M_EvaluateRetractOutput">
-      <LineId Id="5" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="10" Count="2" />
+      <LineId Id="80" Count="1" />
+      <LineId Id="13" Count="2" />
+      <LineId Id="17" Count="28" />
+      <LineId Id="64" Count="15" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="82" Count="7" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="57" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator.M_Advance">
       <LineId Id="4" Count="0" />
@@ -285,7 +385,7 @@ END_VAR
     <LineIds Name="FB_Actuator.M_SetBranchPermissive">
       <LineId Id="10" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Actuator.P_ActuatorConfig.Get">
+    <LineIds Name="FB_Actuator.P_ActuatorConfiguration.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator.P_Status.Get">

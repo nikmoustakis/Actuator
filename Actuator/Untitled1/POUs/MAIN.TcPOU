@@ -1,13 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1">
-  <POU Name="MAIN" Id="{b17fbea9-602c-4a03-a4a4-6d618f263f80}">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{b17fbea9-602c-4a03-a4a4-6d618f263f80}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	
+Actuator :FB_Actuator;
+
+Advance : BOOL;
+rETRACT  :BOOL;
+Reset : BOOL;
+
+
+AdvancedFeedbackUsed : BOOL;
+TimeoutErrorElapsed : TIME := T#2S;
+TimeAdvanceFeedback   : TIME := T#3S;
+
+
 END_VAR
-]]>
-    </Declaration>
+]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[Actuator();
+Actuator.P_ActuatorConfiguration.AdvancedFeedback := AdvancedFeedbackUsed;
+Actuator.P_ActuatorConfiguration.AdvanceFeedbackTimeoutError := TimeoutErrorElapsed;
+Actuator.P_ActuatorConfiguration.AdvanceFeedbackTimeoutError := TimeoutErrorElapsed;
+Actuator.P_ActuatorConfiguration.SimFeedback_Advance_TimeElapsed := TimeAdvanceFeedback;
+
+Actuator.P_ActuatorConfiguration.RetractFeedback := AdvancedFeedbackUsed;
+Actuator.P_ActuatorConfiguration.RetractFeedbackTimeoutError := TimeoutErrorElapsed;
+Actuator.P_ActuatorConfiguration.RetractFeedbackTimeoutError := TimeoutErrorElapsed;
+Actuator.P_ActuatorConfiguration.SimFeedback_Retract_TimeElapsed := TimeAdvanceFeedback;
+
+
+IF advance THEN 
+	Actuator.M_Advance();
+ELSIF Retract THEN 
+	Actuator.M_Retract();
+ELSIF Reset THEN 
+	Actuator.M_Reset();
+END_IF]]></ST>
     </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="11" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="36" Count="3" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="14" Count="1" />
+      <LineId Id="17" Count="1" />
+      <LineId Id="13" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>
