@@ -5,7 +5,7 @@
 VAR_GLOBAL CONSTANT
 	DESCRIPTION_LEN : USINT := 40;
 	MESSAGE_LEN : UDINT := 255;
-	TIMEOUT_LABEL : STRING(Param_Error.LABEL_LEN) := 'Step Timeout';
+	TIMEOUT_LABEL : STRING(Param_Error.LABEL_LEN) := 'Feedback Timeout';
 	TIMEOUT_PRIORITY : E_ErrorPriority := E_ErrorPriority.HIGH;
 END_VAR]]></Declaration>
   </GVL>

@@ -8,7 +8,8 @@ STRUCT
 	PreviousStep : UDINT;
 	CurrentStep : UDINT;
 	NextStep : UDINT;
-	ElapsedTime : TIME;
+	Elapsed_Time_Advance : TIME;
+	Elapsed_Time_Retracted : TIME;
 	Advanced : BOOL;
 	Retracted : BOOL;
 	Unknown : BOOL;
