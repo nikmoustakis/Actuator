@@ -14,23 +14,24 @@ Reset : BOOL;
 
 
 AdvancedFeedbackUsed : BOOL;
-TimeoutErrorElapsed : TIME := T#2S;
-TimeAdvanceFeedback   : TIME := T#3S;
+AdvanceTimeoutErrorElapsed : TIME := T#2S;
+advanceTimeAdvanceFeedback   : TIME := T#3S;
 
-
+RetractFeedbackUsed : BOOL;
+RetractTimeoutErrorElapsed : TIME := T#2S;
+RetractTimeAdvanceFeedback   : TIME := T#3S;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[Actuator();
 Actuator.P_ActuatorConfiguration.AdvancedFeedback := AdvancedFeedbackUsed;
-Actuator.P_ActuatorConfiguration.AdvanceFeedbackTimeoutError := TimeoutErrorElapsed;
-Actuator.P_ActuatorConfiguration.AdvanceFeedbackTimeoutError := TimeoutErrorElapsed;
-Actuator.P_ActuatorConfiguration.SimFeedback_Advance_TimeElapsed := TimeAdvanceFeedback;
+Actuator.P_ActuatorConfiguration.AdvanceFeedbackTimeoutError := AdvanceTimeoutErrorElapsed;
 
-Actuator.P_ActuatorConfiguration.RetractFeedback := AdvancedFeedbackUsed;
-Actuator.P_ActuatorConfiguration.RetractFeedbackTimeoutError := TimeoutErrorElapsed;
-Actuator.P_ActuatorConfiguration.RetractFeedbackTimeoutError := TimeoutErrorElapsed;
-Actuator.P_ActuatorConfiguration.SimFeedback_Retract_TimeElapsed := TimeAdvanceFeedback;
+Actuator.P_ActuatorConfiguration.SimFeedback_Advance_TimeElapsed := advanceTimeAdvanceFeedback;
+
+Actuator.P_ActuatorConfiguration.RetractFeedback := RetractFeedbackUsed;
+Actuator.P_ActuatorConfiguration.RetractFeedbackTimeoutError := RetractTimeoutErrorElapsed;
+Actuator.P_ActuatorConfiguration.SimFeedback_Retract_TimeElapsed := RetractTimeAdvanceFeedback;
 
 
 IF advance THEN 
@@ -49,7 +50,8 @@ END_IF]]></ST>
       <LineId Id="20" Count="0" />
       <LineId Id="28" Count="1" />
       <LineId Id="21" Count="0" />
-      <LineId Id="36" Count="3" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="39" Count="0" />
       <LineId Id="32" Count="0" />
       <LineId Id="31" Count="0" />
       <LineId Id="19" Count="0" />
