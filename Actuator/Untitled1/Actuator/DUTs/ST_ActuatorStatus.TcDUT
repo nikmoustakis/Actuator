@@ -5,9 +5,10 @@
 STRUCT
 	
 	Faulted : BOOL;
-	LastCommand : E_ActuatorCommand;
+	LastCommand : STRING(50);
 //	CurrentStep : UDINT;
 //	NextStep : UDINT;
+	ET_LastCommand : TIME;
 	ET_Status_Advanced : TIME;
 	ET_Status_Retracted : TIME;
 	Advanced : BOOL;

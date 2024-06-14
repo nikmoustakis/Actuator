@@ -14,22 +14,22 @@ Reset : BOOL;
 
 
 AdvancedFeedbackUsed : BOOL;
-AdvanceTimeoutErrorElapsed : TIME := T#2S;
-advanceTimeAdvanceFeedback   : TIME := T#3S;
+AdvanceTimeoutErrorElapsed : TIME := T#20S;
+advanceTimeAdvanceFeedback   : TIME := T#2S;
 
 RetractFeedbackUsed : BOOL;
-RetractTimeoutErrorElapsed : TIME := T#2S;
-RetractTimeAdvanceFeedback   : TIME := T#3S;
+RetractTimeoutErrorElapsed : TIME := T#25S;
+RetractTimeAdvanceFeedback   : TIME := T#2.5S;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[Actuator();
-Actuator.P_ActuatorConfiguration.AdvancedFeedback := AdvancedFeedbackUsed;
+Actuator.P_ActuatorConfiguration.AdvanceFeedback_Used := AdvancedFeedbackUsed;
 Actuator.P_ActuatorConfiguration.AdvanceFeedbackTimeoutError := AdvanceTimeoutErrorElapsed;
 
 Actuator.P_ActuatorConfiguration.SimFeedback_Advance_TimeElapsed := advanceTimeAdvanceFeedback;
 
-Actuator.P_ActuatorConfiguration.RetractFeedback := RetractFeedbackUsed;
+Actuator.P_ActuatorConfiguration.RetractFeedback_Used := RetractFeedbackUsed;
 Actuator.P_ActuatorConfiguration.RetractFeedbackTimeoutError := RetractTimeoutErrorElapsed;
 Actuator.P_ActuatorConfiguration.SimFeedback_Retract_TimeElapsed := RetractTimeAdvanceFeedback;
 

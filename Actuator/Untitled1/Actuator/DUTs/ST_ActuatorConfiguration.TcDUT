@@ -4,8 +4,8 @@
     <Declaration><![CDATA[TYPE ST_ActuatorConfiguration :
 STRUCT
 	Name : STRING(Param_Actuator.DESCRIPTION_LEN) := 'Actuator'; //Name visualized on UI
-	AdvancedFeedback : BOOL;      //TRUE if advanced state feedback is used  
-	RetractFeedback  : BOOL;      //TRUE if retracted state feedback is used  
+	AdvanceFeedback_Used : BOOL;      //TRUE if advanced state feedback is used  
+	RetractFeedback_Used  : BOOL;      //TRUE if retracted state feedback is used  
 	AdvanceFeedbackTimeoutError : TIME; // How long we wait to see advanced feedback before we raise timeout error; 0 if not used
 	RetractFeedbackTimeoutError : TIME; // How long we wait to see retracted feedback before we raise timeout error; 0 if not used
 	SimFeedback_Advance_TimeElapsed : TIME; //If we do not use Advanced Feedback, serves as simulation delay after Advance Output is Set
