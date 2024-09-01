@@ -14,8 +14,8 @@ Reset : BOOL;
 
 
 AdvancedFeedbackUsed : BOOL;
-AdvanceTimeoutErrorElapsed : TIME := T#20S;
-advanceTimeAdvanceFeedback   : TIME := T#2S;
+AdvanceTimeoutErrorElapsed : TIME := T#8S;
+advanceTimeAdvanceFeedback   : TIME := T#9S;
 
 RetractFeedbackUsed : BOOL;
 RetractTimeoutErrorElapsed : TIME := T#25S;
@@ -24,15 +24,15 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[Actuator();
+
+Actuator.P_ActuatorConfiguration.Name := 'Holder';
 Actuator.P_ActuatorConfiguration.AdvanceFeedback_Used := AdvancedFeedbackUsed;
 Actuator.P_ActuatorConfiguration.AdvanceFeedbackTimeoutError := AdvanceTimeoutErrorElapsed;
-
 Actuator.P_ActuatorConfiguration.SimFeedback_Advance_TimeElapsed := advanceTimeAdvanceFeedback;
 
 Actuator.P_ActuatorConfiguration.RetractFeedback_Used := RetractFeedbackUsed;
 Actuator.P_ActuatorConfiguration.RetractFeedbackTimeoutError := RetractTimeoutErrorElapsed;
 Actuator.P_ActuatorConfiguration.SimFeedback_Retract_TimeElapsed := RetractTimeAdvanceFeedback;
-
 
 IF advance THEN 
 	Actuator.M_Advance();
@@ -47,13 +47,14 @@ END_IF]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="11" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="71" Count="0" />
       <LineId Id="20" Count="0" />
-      <LineId Id="28" Count="1" />
+      <LineId Id="28" Count="0" />
       <LineId Id="21" Count="0" />
       <LineId Id="36" Count="1" />
       <LineId Id="39" Count="0" />
       <LineId Id="32" Count="0" />
-      <LineId Id="31" Count="0" />
       <LineId Id="19" Count="0" />
       <LineId Id="2" Count="0" />
       <LineId Id="12" Count="0" />
