@@ -16,6 +16,8 @@ VAR
 	Fault                  : ST_Error;
 	LastCommand            : E_ActuatorCommand;
 	
+	HMI                    : ST_HMI;
+	
 	 
 //Timers used for Advance Output/State
 	Timer_RaiseError_Advance         : TON;   //If feedback is used and has not been TRUE after elapsed Timer raise error
@@ -32,6 +34,8 @@ VAR
 	
 	R_TRIG_Status_Retracted          : R_TRIG;
 	R_TRIG_Retract_Cmd               : R_TRIG;
+	
+	
 END_VAR
 
 VAR CONSTANT
@@ -45,6 +49,7 @@ END_VAR
       <ST><![CDATA[_M_EvaluateAdvanceOutput();
 _M_EvaluateRetractOutput();
 _M_EvaluateErrors();
+_M_HMI();
 
 
 Status.Unknown := NOT (Status.Advanced OR Status.Retracted OR Status.Faulted);
@@ -248,6 +253,20 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="_M_HMI" Id="{e7b957f9-ff3a-4cf6-a073-152ae2b9cab9}" FolderPath="private\">
+      <Declaration><![CDATA[METHOD _M_HMI : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[HMI.Config := ActuatorConfiguration;
+HMI.Status := Status;
+HMI.Inputs := Inputs;
+HMI.Outputs := Outputs;
+HMI.Fault  :=Fault;
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Advance" Id="{ad5584e3-99b6-42fe-b793-a75e466de17e}">
       <Declaration><![CDATA[METHOD M_Advance
 
@@ -377,6 +396,7 @@ END_VAR
       <LineId Id="26" Count="0" />
       <LineId Id="62" Count="0" />
       <LineId Id="109" Count="0" />
+      <LineId Id="156" Count="0" />
       <LineId Id="111" Count="1" />
       <LineId Id="110" Count="0" />
       <LineId Id="66" Count="0" />
@@ -469,6 +489,11 @@ END_VAR
       <LineId Id="88" Count="1" />
       <LineId Id="62" Count="0" />
       <LineId Id="57" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Actuator._M_HMI">
+      <LineId Id="5" Count="1" />
+      <LineId Id="8" Count="2" />
+      <LineId Id="7" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator.M_Advance">
       <LineId Id="4" Count="0" />
