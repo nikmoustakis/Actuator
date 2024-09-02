@@ -24,6 +24,9 @@
     <Compile Include="Actuator\DUTs\E_ActuatorCommand.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Actuator\DUTs\ST_Control.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Actuator\DUTs\ST_HMI.TcDUT">
       <SubType>Code</SubType>
     </Compile>

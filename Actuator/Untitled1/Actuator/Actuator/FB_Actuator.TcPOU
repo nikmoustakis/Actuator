@@ -13,6 +13,7 @@ VAR
 	ActuatorConfiguration  : ST_ActuatorConfiguration;
 	Status                 : ST_ActuatorStatus;
 	
+	Control                : ST_Control;
 	Fault                  : ST_Error;
 	LastCommand            : E_ActuatorCommand;
 	
@@ -379,6 +380,19 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Property Name="P_Control" Id="{ca9803a6-de60-4a26-a9a4-ae4791f93c82}">
+      <Declaration><![CDATA[{warning 'add property implementation'}
+PROPERTY P_Control : REFERENCE TO ST_Control
+]]></Declaration>
+      <Get Name="Get" Id="{9d532be1-f6b9-44b0-a9ae-c4c5c2aba129}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Control REF= Control;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="P_Status" Id="{24f6d3f2-d1d4-45c8-95d4-2ca1c47f0919}">
       <Declaration><![CDATA[{warning 'add property implementation'}
 PROPERTY P_Status : REFERENCE TO ST_ActuatorStatus
@@ -535,6 +549,9 @@ END_VAR
       <LineId Id="10" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator.P_ActuatorConfiguration.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Actuator.P_Control.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator.P_Status.Get">
