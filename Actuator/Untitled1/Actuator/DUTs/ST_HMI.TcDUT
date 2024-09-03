@@ -4,10 +4,11 @@
     <Declaration><![CDATA[TYPE ST_HMI :
 STRUCT
 	Inputs  : ST_Inputs;
-	Outputs : ST_outputs;
 	Status  : ST_ActuatorStatus;
 	Config  : ST_ActuatorConfiguration;
 	Fault   : ST_Error;
+	
+	OneShotClick : BOOL;
 END_STRUCT
 END_TYPE
 ]]></Declaration>
