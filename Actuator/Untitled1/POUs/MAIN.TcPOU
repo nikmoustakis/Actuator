@@ -14,11 +14,11 @@ InAuto : BOOL := TRUE;
 
 
 AdvancedFeedbackUsed : BOOL;
-AdvanceTimeoutErrorElapsed : TIME := T#8S;
+AdvanceTimeoutErrorElapsed : TIME := T#6S;
 advanceTimeAdvanceFeedback   : TIME := T#1S;
 
 RetractFeedbackUsed : BOOL;
-RetractTimeoutErrorElapsed : TIME := T#25S;
+RetractTimeoutErrorElapsed : TIME := T#7S;
 RetractTimeAdvanceFeedback   : TIME := T#2.5S;
 END_VAR
 ]]></Declaration>
