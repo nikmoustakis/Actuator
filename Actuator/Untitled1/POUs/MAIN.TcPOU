@@ -5,10 +5,16 @@
 VAR
 	
 Actuator :FB_Actuator;
+Cutter   : FB_Actuator;
+
 
 Advance : BOOL;
 rETRACT  :BOOL;
 Reset : BOOL;
+
+Advance_cut : BOOL;
+Retract_cut  :BOOL;
+
 
 InAuto : BOOL := TRUE;
 
@@ -23,7 +29,48 @@ RetractTimeAdvanceFeedback   : TIME := T#2.5S;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[Actuator();
+      <ST><![CDATA[_M_Holder();
+_M_Cutter();
+]]></ST>
+    </Implementation>
+    <Method Name="_M_Cutter" Id="{2f121cd8-d703-42ce-817c-3b716cc288b7}">
+      <Declaration><![CDATA[METHOD PUBLIC _M_Cutter : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Cutter();
+
+Cutter.P_ActuatorConfiguration.Name := 'Cutter';
+Cutter.P_ActuatorConfiguration.AdvanceFeedback_Used := AdvancedFeedbackUsed;
+Cutter.P_ActuatorConfiguration.AdvanceFeedbackTimeoutError := AdvanceTimeoutErrorElapsed;
+Cutter.P_ActuatorConfiguration.SimFeedback_Advance_TimeElapsed := advanceTimeAdvanceFeedback;
+
+Cutter.P_ActuatorConfiguration.RetractFeedback_Used := RetractFeedbackUsed;
+Cutter.P_ActuatorConfiguration.RetractFeedbackTimeoutError := RetractTimeoutErrorElapsed;
+Cutter.P_ActuatorConfiguration.SimFeedback_Retract_TimeElapsed := RetractTimeAdvanceFeedback;
+
+Cutter.P_Control.ManualMode := NOT InAuto;
+
+IF advance_cut THEN 
+	Cutter.M_Advance();
+	advance_cut := FALSE;
+ELSIF Retract_cut THEN 
+	Cutter.M_Retract();
+	RETRACT := FALSE;
+ELSIF Retract_cut THEN 
+	Cutter.M_Reset();
+	RESET:= FALSE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="_M_Holder" Id="{24473cd5-834d-4585-9b95-e0ce63ea75c5}">
+      <Declaration><![CDATA[METHOD PUBLIC _M_Holder : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Actuator();
 
 Actuator.P_ActuatorConfiguration.Name := 'Holder';
 Actuator.P_ActuatorConfiguration.AdvanceFeedback_Used := AdvancedFeedbackUsed;
@@ -46,28 +93,20 @@ ELSIF Reset THEN
 	Actuator.M_Reset();
 	RESET:= FALSE;
 END_IF]]></ST>
-    </Implementation>
+      </Implementation>
+    </Method>
     <LineIds Name="MAIN">
-      <LineId Id="11" Count="0" />
-      <LineId Id="72" Count="0" />
-      <LineId Id="71" Count="0" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="21" Count="0" />
-      <LineId Id="36" Count="1" />
-      <LineId Id="39" Count="0" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="93" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="94" Count="0" />
-      <LineId Id="2" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="42" Count="0" />
-      <LineId Id="14" Count="1" />
-      <LineId Id="43" Count="0" />
-      <LineId Id="17" Count="1" />
-      <LineId Id="44" Count="0" />
       <LineId Id="13" Count="0" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="115" Count="0" />
+    </LineIds>
+    <LineIds Name="MAIN._M_Cutter">
+      <LineId Id="6" Count="21" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="MAIN._M_Holder">
+      <LineId Id="6" Count="21" />
+      <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
