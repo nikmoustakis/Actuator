@@ -16,7 +16,7 @@ Advance_cut : BOOL;
 Retract_cut  :BOOL;
 
 
-InAuto : BOOL := TRUE;
+InAuto : BOOL := FALSE;
 
 
 AdvancedFeedbackUsed : BOOL;
@@ -31,6 +31,15 @@ END_VAR
     <Implementation>
       <ST><![CDATA[_M_Holder();
 _M_Cutter();
+
+
+
+
+
+
+
+
+RESET:= FALSE;
 ]]></ST>
     </Implementation>
     <Method Name="_M_Cutter" Id="{2f121cd8-d703-42ce-817c-3b716cc288b7}">
@@ -50,17 +59,17 @@ Cutter.P_ActuatorConfiguration.RetractFeedback_Used := RetractFeedbackUsed;
 Cutter.P_ActuatorConfiguration.RetractFeedbackTimeoutError := RetractTimeoutErrorElapsed;
 Cutter.P_ActuatorConfiguration.SimFeedback_Retract_TimeElapsed := RetractTimeAdvanceFeedback;
 
-Cutter.P_Control.ManualMode := NOT InAuto;
+Cutter.P_ControlMode.ManualMode := NOT InAuto;
 
 IF advance_cut THEN 
 	Cutter.M_Advance();
 	advance_cut := FALSE;
 ELSIF Retract_cut THEN 
 	Cutter.M_Retract();
-	RETRACT := FALSE;
-ELSIF Retract_cut THEN 
+	RETRACT_cut := FALSE;
+ELSIF RESET THEN 
 	Cutter.M_Reset();
-	RESET:= FALSE;
+	
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -81,7 +90,7 @@ Actuator.P_ActuatorConfiguration.RetractFeedback_Used := RetractFeedbackUsed;
 Actuator.P_ActuatorConfiguration.RetractFeedbackTimeoutError := RetractTimeoutErrorElapsed;
 Actuator.P_ActuatorConfiguration.SimFeedback_Retract_TimeElapsed := RetractTimeAdvanceFeedback;
 
-Actuator.P_Control.ManualMode := NOT InAuto;
+Actuator.P_ControlMode.ManualMode := NOT InAuto;
 
 IF advance THEN 
 	Actuator.M_Advance();
@@ -91,13 +100,15 @@ ELSIF Retract THEN
 	RETRACT := FALSE;
 ELSIF Reset THEN 
 	Actuator.M_Reset();
-	RESET:= FALSE;
+	
 END_IF]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="MAIN">
       <LineId Id="13" Count="0" />
       <LineId Id="122" Count="0" />
+      <LineId Id="124" Count="7" />
+      <LineId Id="123" Count="0" />
       <LineId Id="115" Count="0" />
     </LineIds>
     <LineIds Name="MAIN._M_Cutter">

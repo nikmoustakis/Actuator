@@ -13,7 +13,7 @@ VAR
 	ActuatorConfiguration  : ST_ActuatorConfiguration;
 	Status                 : ST_ActuatorStatus;
 	
-	Control                : ST_Control;
+	ControlMode            : ST_ControlMode;
 	Fault                  : ST_Error;
 	LastCommand            : E_ActuatorCommand;
 	
@@ -270,14 +270,14 @@ HMI.Inputs := Inputs;
 HMI.Fault  :=Fault;
 
 
-IF Control.ManualMode AND HMI.OneShotClick THEN 
+IF ControlMode.ManualMode AND HMI.OneShotClick THEN 
 	IF Inputs.Advanced OR Status.Advanced OR (Status.Unknown AND (ActuatorConfiguration.ToggleLogigWhenUnknown = E_ActuatorCommand.Retract)) THEN 
 		M_Retract();
 	ELSIF Inputs.Retracted OR Status.Retracted OR (Status.Unknown AND (ActuatorConfiguration.ToggleLogigWhenUnknown = E_ActuatorCommand.Advance)) THEN   
 		M_Advance();
 	END_IF
 
-ELSIF NOT Control.ManualMode AND HMI.OneShotClick THEN 
+ELSIF NOT ControlMode.ManualMode AND HMI.OneShotClick THEN 
 	Fault.Active := TRUE;
 	
 	Fault.Message := 'Device NOT in Manual';
@@ -405,16 +405,16 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Property Name="P_Control" Id="{ca9803a6-de60-4a26-a9a4-ae4791f93c82}">
+    <Property Name="P_ControlMode" Id="{ca9803a6-de60-4a26-a9a4-ae4791f93c82}">
       <Declaration><![CDATA[{warning 'add property implementation'}
-PROPERTY P_Control : REFERENCE TO ST_Control
+PROPERTY P_ControlMode : REFERENCE TO ST_ControlMode
 ]]></Declaration>
       <Get Name="Get" Id="{9d532be1-f6b9-44b0-a9ae-c4c5c2aba129}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[P_Control REF= Control;]]></ST>
+          <ST><![CDATA[P_ControlMode REF= ControlMode;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -599,7 +599,7 @@ END_VAR
     <LineIds Name="FB_Actuator.P_ActuatorConfiguration.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Actuator.P_Control.Get">
+    <LineIds Name="FB_Actuator.P_ControlMode.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator.P_Status.Get">
