@@ -16,6 +16,13 @@
     <Implicit_KindOfTask>{bb35d2f4-7763-4055-a00c-40e037af8cb2}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{c694acf9-5426-4b3f-b5f2-db22be64f27d}</Implicit_Jitter_Distribution>
     <LibraryReferences>{492d1d40-888a-460b-9dee-4b912de329e4}</LibraryReferences>
+    <Company>NM</Company>
+    <Released>true</Released>
+    <Title>Actuator</Title>
+    <ProjectVersion>1.0.0.1</ProjectVersion>
+    <Author>Nick Moustakis</Author>
+    <Description>Standard library for 2-way acting actuators. Standard actions are Advance/Retract. Includes Input hardware configurations vs simulated inputs with simulated feedback timeouts.</Description>
+    <PreserveCompiledLibComments>false</PreserveCompiledLibComments>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Actuator\Actuator\FB_Actuator.TcPOU">
@@ -55,6 +62,9 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Version\Global_Version.TcGVL">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Actuator\Actuator" />
@@ -63,6 +73,7 @@
     <Folder Include="DUTs" />
     <Folder Include="GVLs" />
     <Folder Include="Actuator" />
+    <Folder Include="Version" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
