@@ -49,22 +49,6 @@
     <Compile Include="Actuator\ITF_Actuator.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Error\DUTs\E_ErrorPriority.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Error\DUTs\ST_Error.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Error\GVLs\Param_Error.TcGVL">
-      <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
-    </Compile>
-    <Compile Include="Error\POUs\F_ClearError.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Error\POUs\F_ResetErrorList.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -77,16 +61,16 @@
     <Folder Include="Actuator\DUTs" />
     <Folder Include="Actuator\GVLs" />
     <Folder Include="DUTs" />
-    <Folder Include="Error" />
-    <Folder Include="Error\DUTs" />
-    <Folder Include="Error\GVLs" />
-    <Folder Include="Error\POUs" />
     <Folder Include="GVLs" />
     <Folder Include="Actuator" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="Error">
+      <DefaultResolution>Error, * (NM)</DefaultResolution>
+      <Namespace>Error</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>
