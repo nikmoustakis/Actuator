@@ -8,23 +8,6 @@
 
 ]]></Declaration>
     </Method>
-    <Method Name="M_CheckFaultCondition" Id="{16381640-567f-421d-b87a-cc6774fc50fa}">
-      <Declaration><![CDATA[METHOD M_CheckFaultCondition 
-VAR_INPUT
-	Error : REFERENCE TO ST_Error;
-END_VAR
-]]></Declaration>
-    </Method>
-    <Method Name="M_CheckFaultConditionCustom" Id="{028803e1-67ae-4efe-80e5-c5de16c119da}">
-      <Declaration><![CDATA[METHOD M_CheckFaultConditionCustom 
-VAR_INPUT
-	Active : BOOL;
-	Label : STRING(Param_Error.LABEL_LEN);
-	Message : STRING(Param_Error.MESSAGE_LEN);
-	Priority : E_ErrorPriority;
-END_VAR
-]]></Declaration>
-    </Method>
     <Method Name="M_Reset" Id="{caf815d4-5543-4773-bd0f-b83b9282d109}">
       <Declaration><![CDATA[METHOD M_Reset : BOOL
 

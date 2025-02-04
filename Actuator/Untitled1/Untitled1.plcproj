@@ -19,15 +19,12 @@
     <Company>NM</Company>
     <Released>true</Released>
     <Title>Actuator</Title>
-    <ProjectVersion>1.0.0.1</ProjectVersion>
+    <ProjectVersion>1.0.0.2</ProjectVersion>
     <Author>Nick Moustakis</Author>
     <Description>Standard library for 2-way acting actuators. Standard actions are Advance/Retract. Includes Input hardware configurations vs simulated inputs with simulated feedback timeouts.</Description>
     <PreserveCompiledLibComments>false</PreserveCompiledLibComments>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Actuator\Actuator\FB_Actuator.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Actuator\DUTs\E_ActuatorCommand.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -49,6 +46,9 @@
     <Compile Include="Actuator\DUTs\ST_ActuatorConfiguration.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Actuator\FB_Actuator.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Actuator\GVLs\Param_Actuator.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
@@ -67,11 +67,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Actuator\Actuator" />
     <Folder Include="Actuator\DUTs" />
     <Folder Include="Actuator\GVLs" />
-    <Folder Include="DUTs" />
-    <Folder Include="GVLs" />
     <Folder Include="Actuator" />
     <Folder Include="Version" />
     <Folder Include="VISUs" />
@@ -99,6 +96,11 @@
     <None Include="Untitled1.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderResolution Include="Error">
+      <Resolution>Error, 1.0.0.4 (NM)</Resolution>
+    </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
