@@ -26,6 +26,14 @@ PROPERTY P_ActuatorConfiguration : REFERENCE TO ST_ActuatorConfiguration]]></Dec
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Property Name="P_Error" Id="{cae39d63-0c88-47b7-af67-bfae5d670427}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+{attribute 'suppress_wrn_C0410'}
+PROPERTY P_Error : REFERENCE TO ST_Error]]></Declaration>
+      <Get Name="Get" Id="{f848242d-1bf2-4b73-8f59-5cef658f64ae}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
     <Property Name="P_Status" Id="{1273a58f-2dc7-49b5-9bc7-d2673b6ff7e9}">
       <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
 {attribute 'suppress_wrn_C0410'}

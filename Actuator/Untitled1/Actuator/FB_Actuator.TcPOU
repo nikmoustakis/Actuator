@@ -14,7 +14,7 @@ VAR
 	Status                 : ST_ActuatorStatus;
 	
 	ControlMode            : ST_ControlMode;
-	Fault                  : ST_Error;
+	Error                  : ST_Error;
 	LastCommand            : E_ActuatorCommand;
 	
 	HMI                    : ST_HMI;
@@ -120,29 +120,29 @@ END_VAR
       <Implementation>
         <ST><![CDATA[IF (Inputs.Advanced AND Inputs.Retracted) THEN 
 	
-	F_SetError(Error := Fault,Description := '', Label := '', Message := 'Input I/O Short', Priority := E_ErrorPriority.Critical);
+	F_SetError(Error := Error,Description := '', Label := '', Message := 'Input I/O Short', Priority := E_ErrorPriority.Critical);
 
 END_IF
 
 IF (Status.Advanced AND Status.Retracted) THEN 
 	
-	F_SetError(Error := Fault,Description := '', Label := '', Message := 'Input Status Short', Priority := E_ErrorPriority.Critical);
+	F_SetError(Error := Error,Description := '', Label := '', Message := 'Input Status Short', Priority := E_ErrorPriority.Critical);
 
 END_IF
 
 IF Timer_RaiseError_Advance.Q THEN 
 	
-	F_SetError(Error := Fault,Description := '', Label := '', Message := CONCAT(('Advanced Input '),Param_Actuator.TIMEOUT_LABEL), Priority := E_ErrorPriority.Critical);
+	F_SetError(Error := Error,Description := '', Label := '', Message := CONCAT(('Advanced Input '),Param_Actuator.TIMEOUT_LABEL), Priority := E_ErrorPriority.Critical);
 
 END_IF
 
 IF Timer_RaiseError_Retract.Q THEN 
 	
-	F_SetError(Error := Fault,Description := '', Label := '', Message := CONCAT(('Retracted Input '),Param_Actuator.TIMEOUT_LABEL), Priority := E_ErrorPriority.Critical);
+	F_SetError(Error := Error,Description := '', Label := '', Message := CONCAT(('Retracted Input '),Param_Actuator.TIMEOUT_LABEL), Priority := E_ErrorPriority.Critical);
 
 END_IF
 
-Status.Faulted := Fault.Active;
+Status.Faulted := Error.Active;
 	]]></ST>
       </Implementation>
     </Method>
@@ -228,7 +228,7 @@ HMI.Status := Status;
 HMI.Inputs := Inputs;
 
 
-HMI.Fault  :=Fault;
+HMI.Fault  :=Error;
 
 
 IF ControlMode.ManualMode AND HMI.OneShotClick AND NOT Status.Retracting AND NOT Status.Advancing THEN 
@@ -244,7 +244,7 @@ ELSIF NOT ControlMode.ManualMode AND HMI.OneShotClick THEN
 //	Fault.Message := 'Device NOT in Manual';
 //	Fault.Priority := E_ErrorPriority.Medium;
 	
-	F_SetError(Error := Fault, Description := '', Label := '', Message := 'Device NOT in Manual', Priority := E_ErrorPriority.Medium);
+	F_SetError(Error := Error, Description := '', Label := '', Message := 'Device NOT in Manual', Priority := E_ErrorPriority.Medium);
 
 END_IF
 
@@ -272,7 +272,7 @@ Outputs.Retract := FALSE;
 
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[F_ClearError(Fault);
+        <ST><![CDATA[F_ClearError(Error);
 Timer_RaiseError_Advance(IN := FALSE);
 Timer_RaiseError_Retract(IN := FALSE);
 
@@ -328,6 +328,19 @@ END_VAR
 ]]></Declaration>
         <Implementation>
           <ST><![CDATA[P_ControlMode REF= ControlMode;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="P_Error" Id="{3652eadd-1132-4b38-b876-f60bd21ff1ee}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+{attribute 'suppress_wrn_C0410'}
+PROPERTY P_Error : REFERENCE TO ST_Error]]></Declaration>
+      <Get Name="Get" Id="{41e909fb-4996-43de-9f44-22ebe912fe24}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Error REF= Error;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -498,6 +511,9 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator.P_ControlMode.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Actuator.P_Error.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Actuator.P_Status.Get">

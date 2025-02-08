@@ -17,9 +17,9 @@
     <Implicit_Jitter_Distribution>{c694acf9-5426-4b3f-b5f2-db22be64f27d}</Implicit_Jitter_Distribution>
     <LibraryReferences>{492d1d40-888a-460b-9dee-4b912de329e4}</LibraryReferences>
     <Company>NM</Company>
-    <Released>false</Released>
+    <Released>true</Released>
     <Title>Actuator</Title>
-    <ProjectVersion>1.0.0.2</ProjectVersion>
+    <ProjectVersion>1.0.0.4</ProjectVersion>
     <Author>Nick Moustakis</Author>
     <Description>Standard library for 2-way acting actuators. Standard actions are Advance/Retract. Includes Input hardware configurations vs simulated inputs with simulated feedback timeouts.</Description>
     <PreserveCompiledLibComments>false</PreserveCompiledLibComments>
@@ -62,6 +62,18 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Project Information\F_GetCompany.TcPOU">
+      <SubType>Code</SubType>
+      <SystemCall>true</SystemCall>
+    </Compile>
+    <Compile Include="Project Information\F_GetTitle.TcPOU">
+      <SubType>Code</SubType>
+      <SystemCall>true</SystemCall>
+    </Compile>
+    <Compile Include="Project Information\F_GetVersion.TcPOU">
+      <SubType>Code</SubType>
+      <SystemCall>true</SystemCall>
+    </Compile>
     <Compile Include="Version\Global_Version.TcGVL">
       <SubType>Code</SubType>
     </Compile>
@@ -70,6 +82,7 @@
     <Folder Include="Actuator\DUTs" />
     <Folder Include="Actuator\GVLs" />
     <Folder Include="Actuator" />
+    <Folder Include="Project Information" />
     <Folder Include="Version" />
     <Folder Include="VISUs" />
     <Folder Include="POUs" />
