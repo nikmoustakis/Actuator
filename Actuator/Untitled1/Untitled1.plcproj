@@ -19,7 +19,7 @@
     <Company>NM</Company>
     <Released>true</Released>
     <Title>Actuator</Title>
-    <ProjectVersion>1.0.0.4</ProjectVersion>
+    <ProjectVersion>1.0.0.5</ProjectVersion>
     <Author>Nick Moustakis</Author>
     <Description>Standard library for 2-way acting actuators. Standard actions are Advance/Retract. Includes Input hardware configurations vs simulated inputs with simulated feedback timeouts.</Description>
     <PreserveCompiledLibComments>false</PreserveCompiledLibComments>
@@ -90,6 +90,7 @@
   <ItemGroup>
     <PlaceholderReference Include="Actuator">
       <DefaultResolution>Actuator, * (NM)</DefaultResolution>
+      <Namespace>Actuator</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Error">
       <DefaultResolution>Error, * (NM)</DefaultResolution>
@@ -115,7 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <PlaceholderResolution Include="Error">
-      <Resolution>Error, 1.0.0.4 (NM)</Resolution>
+      <Resolution>Error, 1.0.0.5 (NM)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
