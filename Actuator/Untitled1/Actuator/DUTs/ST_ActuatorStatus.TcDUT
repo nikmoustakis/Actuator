@@ -13,6 +13,8 @@ STRUCT
 	ET_Status_Retracted : TIME;
 	Advanced : BOOL;
 	Retracted : BOOL;
+	Advancing : BOOL;
+	Retracting : BOOL;
 	Unknown : BOOL;
 
 END_STRUCT

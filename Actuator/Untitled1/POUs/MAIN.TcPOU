@@ -21,7 +21,7 @@ InAuto : BOOL := FALSE;
 
 AdvancedFeedbackUsed : BOOL;
 AdvanceTimeoutErrorElapsed : TIME := T#6S;
-advanceTimeAdvanceFeedback   : TIME := T#1S;
+advanceTimeAdvanceFeedback   : TIME := T#3S;
 
 RetractFeedbackUsed : BOOL;
 RetractTimeoutErrorElapsed : TIME := T#7S;

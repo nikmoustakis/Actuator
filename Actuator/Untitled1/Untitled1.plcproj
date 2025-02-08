@@ -17,7 +17,7 @@
     <Implicit_Jitter_Distribution>{c694acf9-5426-4b3f-b5f2-db22be64f27d}</Implicit_Jitter_Distribution>
     <LibraryReferences>{492d1d40-888a-460b-9dee-4b912de329e4}</LibraryReferences>
     <Company>NM</Company>
-    <Released>true</Released>
+    <Released>false</Released>
     <Title>Actuator</Title>
     <ProjectVersion>1.0.0.2</ProjectVersion>
     <Author>Nick Moustakis</Author>
@@ -75,6 +75,9 @@
     <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="Actuator">
+      <DefaultResolution>Actuator, * (NM)</DefaultResolution>
+    </PlaceholderReference>
     <PlaceholderReference Include="Error">
       <DefaultResolution>Error, * (NM)</DefaultResolution>
       <Namespace>Error</Namespace>
