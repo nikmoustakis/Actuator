@@ -7,17 +7,17 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	Inputs 				   : ST_Inputs;
-	Outputs				   : ST_Outputs;
+	Inputs 				   : Actuator.ST_Inputs;
+	Outputs				   : Actuator.ST_Outputs;
 	
-	ActuatorConfiguration  : ST_ActuatorConfiguration;
-	Status                 : ST_ActuatorStatus;
+	ActuatorConfiguration  : Actuator.ST_ActuatorConfiguration;
+	Status                 : Actuator.ST_ActuatorStatus;
 	
-	ControlMode            : ST_ControlMode;
-	Error                  : ST_Error;
-	LastCommand            : E_ActuatorCommand;
+	ControlMode            : Actuator.ST_ControlMode;
+	Error                  : Actuator.ST_Error;
+	LastCommand            : Actuator.E_ActuatorCommand;
 	
-	HMI                    : ST_HMI;
+	HMI                    : Actuator.ST_HMI;
 	
 	 
 //Timers used for Advance Output/State
@@ -308,7 +308,7 @@ Outputs.Advance := FALSE;]]></ST>
       </Implementation>
     </Method>
     <Property Name="P_ActuatorConfiguration" Id="{d982b9bc-be38-446d-b1f9-3d9d1aa27058}">
-      <Declaration><![CDATA[PROPERTY P_ActuatorConfiguration : REFERENCE TO ST_ActuatorConfiguration
+      <Declaration><![CDATA[PROPERTY P_ActuatorConfiguration : REFERENCE TO Actuator.ST_ActuatorConfiguration
 ]]></Declaration>
       <Get Name="Get" Id="{fe3ba880-ca99-4fa2-9c56-266a541a4801}">
         <Declaration><![CDATA[VAR
@@ -320,7 +320,7 @@ END_VAR
       </Get>
     </Property>
     <Property Name="P_ControlMode" Id="{ca9803a6-de60-4a26-a9a4-ae4791f93c82}">
-      <Declaration><![CDATA[PROPERTY P_ControlMode : REFERENCE TO ST_ControlMode
+      <Declaration><![CDATA[PROPERTY P_ControlMode : REFERENCE TO Actuator.ST_ControlMode
 ]]></Declaration>
       <Get Name="Get" Id="{9d532be1-f6b9-44b0-a9ae-c4c5c2aba129}">
         <Declaration><![CDATA[VAR
@@ -334,7 +334,7 @@ END_VAR
     <Property Name="P_Error" Id="{3652eadd-1132-4b38-b876-f60bd21ff1ee}">
       <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
 {attribute 'suppress_wrn_C0410'}
-PROPERTY P_Error : REFERENCE TO ST_Error]]></Declaration>
+PROPERTY P_Error : REFERENCE TO Error.ST_Error]]></Declaration>
       <Get Name="Get" Id="{41e909fb-4996-43de-9f44-22ebe912fe24}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -345,7 +345,7 @@ END_VAR
       </Get>
     </Property>
     <Property Name="P_Status" Id="{24f6d3f2-d1d4-45c8-95d4-2ca1c47f0919}">
-      <Declaration><![CDATA[PROPERTY P_Status : REFERENCE TO ST_ActuatorStatus
+      <Declaration><![CDATA[PROPERTY P_Status : REFERENCE TO Actuator.ST_ActuatorStatus
 ]]></Declaration>
       <Get Name="Get" Id="{c600f93d-fb20-4117-a317-dd5c20a90da0}">
         <Declaration><![CDATA[VAR

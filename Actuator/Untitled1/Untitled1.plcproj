@@ -23,6 +23,7 @@
     <Author>Nick Moustakis</Author>
     <Description>Standard library for 2-way acting actuators. Standard actions are Advance/Retract. Includes Input hardware configurations vs simulated inputs with simulated feedback timeouts.</Description>
     <PreserveCompiledLibComments>false</PreserveCompiledLibComments>
+    <DefaultNamespace>Actuator</DefaultNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Actuator\DUTs\E_ActuatorCommand.TcDUT">
