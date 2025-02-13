@@ -19,7 +19,7 @@
     <Company>NM</Company>
     <Released>true</Released>
     <Title>Actuator</Title>
-    <ProjectVersion>1.0.0.5</ProjectVersion>
+    <ProjectVersion>1.0.0.6</ProjectVersion>
     <Author>Nick Moustakis</Author>
     <Description>Standard library for 2-way acting actuators. Standard actions are Advance/Retract. Includes Input hardware configurations vs simulated inputs with simulated feedback timeouts.</Description>
     <PreserveCompiledLibComments>false</PreserveCompiledLibComments>
